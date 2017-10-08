@@ -35,7 +35,7 @@
       dest: /usr/share/nginx/mysite/index.html
   notify: restart nginx
 
-- name: Enable nginx-conf for egfe
+- name: Enable 01_site in NGINX 
   file:
     path: /etc/nginx/sites-enabled/01_site
     src: ../sites-available/01_site
