@@ -1,7 +1,7 @@
 # This is a sample playbook to launch an AWS Virtual Machine
 ---
 
-# Configure launch VM
+# Launch VMs
 - name: Launch VM instances
   hosts: localhost
   connection: local
@@ -27,7 +27,9 @@
     register: ec2
 
 
-
+## This is to be used instead of sleeping the sh file. I need to see why it didn't work
+#
+#
 #  - name: Wait for ssh to start
 #    wait_for:
 #      host: "{{ item.public_dns_name }}" 

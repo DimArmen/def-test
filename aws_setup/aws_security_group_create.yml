@@ -1,7 +1,7 @@
 # This is a sample playbook to configure AWS Sec Group
 ---
 
-# Configure SecGroupo to launch VM
+# Create and configure AWS Security Group
 - name: Configure AWS SecGroup
   hosts: localhost
   connection: local

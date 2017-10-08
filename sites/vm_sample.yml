@@ -1,4 +1,7 @@
 ---
+# This is the site definition. Defines which Ansible role to apply to selected hosts.
+# In this example the selected hosts are identified by the tag_Name_definiens tag.
+
 - hosts: tag_Name_definiens
   gather_facts: false
 

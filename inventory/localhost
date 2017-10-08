@@ -1,2 +1,3 @@
+## This is used reach EC2 when initialiazing the cloud setup
 [local]
 localhost ansible_python_interpreter=/usr/bin/python2.7
