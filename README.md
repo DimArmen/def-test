@@ -45,3 +45,12 @@ ssh-keygen -t rsa -b 2048
 eval $(ssh-agent -s) 
 ssh-add ~/.ssh/id_rsa
 ```
+# Run the process
+
+```
+git clone https://github.com/DimArmen/def-test.git
+cd def-test
+bash run.sh
+
+```
+Reach to the IP address of the machines. Both ports 80, 8080 should work. That is the iptables rule redirect. 
