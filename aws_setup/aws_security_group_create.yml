@@ -1,0 +1,32 @@
+# This is a sample playbook to configure AWS Sec Group
+---
+
+# Configure SecGroupo to launch VM
+- name: Configure AWS SecGroup
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+  - name: Define AWS Security Group
+    ec2_group:
+      name: "{{ security_group_name }}"
+      description: "Sample security group"
+      region: "{{ aws_region }}"
+      vpc_id:  "{{ vpc_id }}"
+      rules:
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: 0.0.0.0/0
+        - proto: tcp
+          from_port: 8080
+          to_port: 8080
+          cidr_ip: 0.0.0.0/0
+      rules_egress:
+        - proto: all
+          cidr_ip: 0.0.0.0/0
+    register: sec_group_output

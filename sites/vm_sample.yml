@@ -1,0 +1,6 @@
+---
+- hosts: tag_Name_definiens
+  gather_facts: false
+
+  roles:
+    - vm_sample

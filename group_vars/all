@@ -1,0 +1,11 @@
+## Variables file for AWS access and EC2 specifics
+
+key_name: definienskey
+aws_region: eu-central-1
+#ami_id: ami-1e339e71
+#ami_id: ami-c7ee5ca8
+ami_id: ami-d448e4bb
+instance_type: t2.micro
+vpc_subnet_id: subnet-8a1083f0
+vpc_id: vpc-1cb93274 
+security_group_name: "def-sample-group"

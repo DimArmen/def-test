@@ -1,0 +1,63 @@
+---
+
+#- name: Configure VM 
+#  hosts: tag_Name_definiens 
+#  gather_facts: false
+#  become: yes
+#  become_user: root
+#  become_method: sudo
+  
+#  tasks:
+- name: Install nginx webserver
+  apt: 
+    name: nginx 
+    state: installed 
+    update_cache: true
+
+- name: Remove default NGINX site
+  file: 
+    state: absent
+    path: "{{ item.path }}"
+  with_items:
+    - path: /etc/nginx/sites-available/default
+    - path: /etc/nginx/sites-enabled/default
+
+- name: Create directory for new site
+  file: 
+    path: /usr/share/nginx/mysite
+    state: directory
+    mode: 0755
+
+- name: Template NGINX file
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - src: template_nginx_available_site.j2
+      dest: /etc/nginx/sites-available/01_site
+    - src: template_index.j2
+      dest: /usr/share/nginx/mysite/index.html
+  notify: restart nginx
+
+- name: Enable nginx-conf for egfe
+  file:
+    path: /etc/nginx/sites-enabled/01_site
+    src: ../sites-available/01_site
+    state: link
+  notify: reload nginx
+
+
+- name: Redirect port 80 to 8080
+  iptables:
+    table: nat
+    chain: PREROUTING
+    in_interface: eth0
+    protocol: tcp
+    match: tcp
+    destination_port: 80
+    jump: REDIRECT
+    to_ports: 8080
+  become: yes
